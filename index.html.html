@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Deliezma Syefira Kamila</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Beau+Rivage&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-black:#05080a;
+    --night-green:#0b1d17;
+    --ivory:#f7f2e9;
+    --rose:#ffb4c6;
+    --gold:#f3dfb0;
+    --teal-light:#bfe9da;
+    --teal-deep:#2f6e63;
+    --glow-blue:#aee3f0;
+    --glow-blue-soft:#7fc7da;
+    --glow-core:#fffaf0;
+    --font-display:'Playfair Display', serif;
+    --font-script:'Beau Rivage', cursive;
+    --font-body:'Jost', sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    width:100%; min-height:100vh;
+    background:var(--ink-black);
+    font-family:var(--font-body);
+    color:var(--ivory);
+    overflow-x:hidden;
+  }
+
+  .screen{
+    width:100%; min-height:100vh;
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+    padding:8vh 6vw;
+    text-align:center;
+  }
+  .screen.active{ display:flex; }
+  .screen.active .reveal{ animation:fadeUp .9s ease forwards; }
+  .screen.leaving{ animation:fadeOutScreen .45s ease forwards; }
+
+  @keyframes fadeOutScreen{ to{ opacity:0; transform:scale(.97);} }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+
+  /* ---------- SCREEN 1 : GREETING ---------- */
+  #screen-greeting{
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255,180,198,.08), transparent 45%),
+      radial-gradient(circle at 50% 22%, #15241f 0%, #081511 55%, var(--ink-black) 100%);
+  }
+
+  .hearts-bg{ position:absolute; inset:0; pointer-events:none; z-index:0; }
+  .heart-particle{
+    position:absolute; bottom:-10%;
+    color:var(--rose); opacity:0;
+    animation:floatHeart linear infinite;
+    filter:drop-shadow(0 0 6px rgba(255,180,198,.5));
+  }
+  @keyframes floatHeart{
+    0%{ transform:translateY(0) scale(.7) rotate(-6deg); opacity:0; }
+    12%{ opacity:.85; }
+    85%{ opacity:.35; }
+    100%{ transform:translateY(-105vh) scale(1.05) rotate(8deg); opacity:0; }
+  }
+
+  .eyebrow{
+    position:relative; z-index:1;
+    font-size:.72rem; letter-spacing:.32em; text-transform:uppercase;
+    color:var(--rose); opacity:.75; margin-bottom:1.4rem;
+    animation-delay:.05s;
+  }
+
+  .name{
+    position:relative; z-index:1;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:.05em .55em;
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(1.9rem, 8.5vw, 3.6rem);
+    line-height:1.18;
+    margin:0 0 1.1rem 0;
+    max-width:680px;
+  }
+  .word{ display:inline-flex; white-space:nowrap; }
+  .letter{
+    display:inline-block;
+    color:rgba(247,242,233,.4);
+    animation:shimmerLetter 2.8s ease-in-out infinite;
+    animation-delay:calc(var(--i) * .085s);
+  }
+  .heart-suffix{ margin-left:.12em; color:rgba(255,180,198,.55); }
+  @keyframes shimmerLetter{
+    0%,100%{ opacity:.38; text-shadow:none; transform:translateY(0); }
+    50%{
+      opacity:1;
+      text-shadow:0 0 16px rgba(255,255,255,.85), 0 0 34px rgba(255,196,214,.55), 0 0 58px rgba(243,223,176,.4);
+      transform:translateY(-2px);
+    }
+  }
+
+  .tagline{
+    position:relative; z-index:1;
+    font-family:var(--font-script);
+    font-size:clamp(1.6rem, 6vw, 2.3rem);
+    color:var(--gold);
+    margin:.2rem 0 2.6rem 0;
+    animation-delay:.4s;
+  }
+  .tagline .tiny-heart{ color:var(--rose); }
+
+  .open-btn{
+    position:relative; z-index:1;
+    font-family:var(--font-body); font-weight:500; letter-spacing:.04em;
+    font-size:clamp(.95rem, 3vw, 1.05rem);
+    color:var(--ivory);
+    background:linear-gradient(135deg, rgba(255,180,198,.16), rgba(243,223,176,.10));
+    border:1px solid rgba(255,200,214,.55);
+    padding:.95em 2.5em;
+    border-radius:999px;
+    cursor:pointer;
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    animation:fadeUp .9s ease forwards, btnPulse 2.6s ease-in-out infinite;
+    animation-delay:.7s, 1.6s;
+    transition:transform .25s ease, box-shadow .35s ease, background .3s ease;
+  }
+  .open-btn:hover{
+    transform:translateY(-3px) scale(1.04);
+    background:linear-gradient(135deg, rgba(255,180,198,.26), rgba(243,223,176,.16));
+    box-shadow:0 10px 32px rgba(255,150,180,.35);
+  }
+  .open-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
+  @keyframes btnPulse{
+    0%,100%{ box-shadow:0 0 0 0 rgba(255,180,198,.0); }
+    50%{ box-shadow:0 0 26px 4px rgba(255,180,198,.28); }
+  }
+
+  /* ---------- SCREEN 2 : FLOWER GARDEN (glowing night version) ---------- */
+  #screen-flower{
+    background:
+      radial-gradient(ellipse at 50% 60%, rgba(126,199,218,.10), transparent 60%),
+      linear-gradient(180deg, #0a1f17 0%, #0d2a1d 45%, #061309 100%);
+  }
+  .stars{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+  .star{
+    position:absolute; border-radius:50%;
+    background:radial-gradient(circle, #fff, rgba(255,255,255,0));
+    animation:twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{ opacity:.15; transform:scale(.7); }
+    50%{ opacity:1; transform:scale(1.25); }
+  }
+
+  .back-btn{
+    position:absolute; top:5vh; left:6vw; z-index:2;
+    font-family:var(--font-body); font-size:1.4rem; line-height:1;
+    color:rgba(247,242,233,.55); background:none; border:none; cursor:pointer;
+    padding:.3em .5em; transition:color .25s ease, transform .25s ease;
+  }
+  .back-btn:hover{ color:var(--ivory); transform:translateX(-2px); }
+
+  .flower-wrap{ position:relative; z-index:1; width:min(82vw, 380px); }
+  .flower-wrap svg{ width:100%; height:auto; display:block; overflow:visible; }
+
+  .stem path{
+    fill:none; stroke:#5fa3c2; stroke-width:4; stroke-linecap:round;
+    stroke-dasharray:100; stroke-dashoffset:100;
+    animation:drawStem 1.5s ease forwards;
+    filter:drop-shadow(0 0 3px rgba(120,200,230,.4));
+  }
+  @keyframes drawStem{ to{ stroke-dashoffset:0; } }
+
+  /* tall wild grass blades behind/around the bouquet */
+  .wild-grass path{
+    fill:none; stroke:#2f7a45; stroke-width:3; stroke-linecap:round;
+    stroke-dasharray:100; stroke-dashoffset:100;
+    animation:drawStem 1.4s ease forwards;
+  }
+  .wild-grass{ transform-origin:160px 440px; }
+  .wgA{ animation:swayGrassA 3.6s ease-in-out infinite; animation-delay:1.2s; }
+  .wgB{ animation:swayGrassB 3.1s ease-in-out infinite; animation-delay:1.4s; }
+  .wgC{ animation:swayGrassA 3.9s ease-in-out infinite; animation-delay:1.1s; }
+  .wgD{ animation:swayGrassB 3.3s ease-in-out infinite; animation-delay:1.5s; }
+  @keyframes swayGrassA{ 0%,100%{ transform:rotate(-5deg); } 50%{ transform:rotate(4deg); } }
+  @keyframes swayGrassB{ 0%,100%{ transform:rotate(4.5deg); } 50%{ transform:rotate(-3.5deg); } }
+
+  /* gentle continuous sway once the bouquet has grown in */
+  .sway-a{ transform-origin:160px 430px; animation:swayA 4.4s ease-in-out infinite; animation-delay:1.9s; }
+  .sway-b{ transform-origin:160px 430px; animation:swayB 3.8s ease-in-out infinite; animation-delay:2.05s; }
+  .sway-c{ transform-origin:160px 430px; animation:swayC 4.1s ease-in-out infinite; animation-delay:2.2s; }
+  .sway-bush{ transform-origin:160px 430px; animation:swayBush 5s ease-in-out infinite; animation-delay:1.6s; }
+  @keyframes swayA{ 0%,100%{ transform:rotate(-3.2deg); } 50%{ transform:rotate(3.4deg); } }
+  @keyframes swayB{ 0%,100%{ transform:rotate(-2.5deg); } 50%{ transform:rotate(2.8deg); } }
+  @keyframes swayC{ 0%,100%{ transform:rotate(-2.8deg); } 50%{ transform:rotate(2.3deg); } }
+  @keyframes swayBush{ 0%,100%{ transform:rotate(-1.1deg); } 50%{ transform:rotate(1.2deg); } }
+
+  .bloom-item{
+    opacity:0;
+    animation:bloom .65s ease-out forwards;
+  }
+  @keyframes bloom{ to{ opacity:1; } }
+
+  /* soft pulsing glow on each flower head, like the video's bioluminescent look */
+  .flower-glow{
+    animation:bloom .65s ease-out forwards, petalGlow 3.2s ease-in-out infinite;
+  }
+  @keyframes petalGlow{
+    0%,100%{ filter:drop-shadow(0 0 6px rgba(160,225,240,.55)) drop-shadow(0 0 14px rgba(160,225,240,.25)); }
+    50%{ filter:drop-shadow(0 0 14px rgba(190,235,245,.85)) drop-shadow(0 0 30px rgba(160,225,240,.45)); }
+  }
+
+  .speck{
+    transform-box:fill-box; transform-origin:center;
+    animation:twinkle ease-in-out infinite;
+  }
+  /* drifting light specks that rise around the bouquet, echoing the video's floating motes */
+  .firefly{
+    animation:fireflyRise ease-in-out infinite;
+    transform-box:fill-box; transform-origin:center;
+  }
+  @keyframes fireflyRise{
+    0%{ opacity:0; transform:translateY(0) scale(.6); }
+    15%{ opacity:.9; }
+    50%{ opacity:.6; }
+    85%{ opacity:.3; }
+    100%{ opacity:0; transform:translateY(-70px) scale(1.1); }
+  }
+
+  .garden-msg{
+    position:relative; z-index:1;
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(1.5rem, 6.5vw, 2.4rem);
+    letter-spacing:.02em;
+    color:var(--ivory);
+    text-shadow:0 0 22px rgba(160,225,240,.45);
+    margin-top:2rem;
+    opacity:0;
+    animation:fadeUp 1s ease forwards;
+    animation-delay:2.6s;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- SCREEN 1 -->
+  <section id="screen-greeting" class="screen active">
+    <div class="hearts-bg" id="heartsBg"></div>
+    <p class="eyebrow reveal">Untuk kamu yang spesial</p>
+    <h1 class="name reveal" id="nameText"></h1>
+    <p class="tagline reveal">Sayangku, Cintaku, Cantiku, Duniaku <span class="tiny-heart">♥</span></p>
+    <button class="open-btn reveal" id="openBtn">Klick dong 🥺</button>
+  </section>
+
+  <!-- SCREEN 2 -->
+  <section id="screen-flower" class="screen">
+    <div class="stars" id="stars"></div>
+    <button class="back-btn" id="backBtn" aria-label="kembali">‹</button>
+
+    <div class="flower-wrap">
+      <svg viewBox="0 0 320 460" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="petalGrad" x1="0" y1="0" x2="0" y2="-40" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#eaf8fb"/>
+            <stop offset="55%" stop-color="#aee3f0"/>
+            <stop offset="100%" stop-color="#6fb6cf"/>
+          </linearGradient>
+          <radialGradient id="centerOuterGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fffefb"/>
+            <stop offset="100%" stop-color="#fdf6e3"/>
+          </radialGradient>
+          <radialGradient id="centerInnerGrad" cx="50%" cy="55%" r="55%">
+            <stop offset="0%" stop-color="#fff6da"/>
+            <stop offset="100%" stop-color="#f0d28a"/>
+          </radialGradient>
+          <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8fd0e0"/>
+            <stop offset="100%" stop-color="#316f86"/>
+          </linearGradient>
+          <linearGradient id="leafGradDark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4f8fa8"/>
+            <stop offset="100%" stop-color="#234f60"/>
+          </linearGradient>
+
+          <symbol id="flower" viewBox="-46 -46 92 92">
+            <g transform="rotate(0)"><path d="M0,0 C-20,-6 -24,-26 -14,-38 C-6,-46 6,-46 14,-38 C24,-26 20,-6 0,0 Z" fill="url(#petalGrad)" stroke="#bfeefa" stroke-width=".6" stroke-opacity=".5"/></g>
+            <g transform="rotate(72)"><path d="M0,0 C-20,-6 -24,-26 -14,-38 C-6,-46 6,-46 14,-38 C24,-26 20,-6 0,0 Z" fill="url(#petalGrad)" stroke="#bfeefa" stroke-width=".6" stroke-opacity=".5"/></g>
+            <g transform="rotate(144)"><path d="M0,0 C-20,-6 -24,-26 -14,-38 C-6,-46 6,-46 14,-38 C24,-26 20,-6 0,0 Z" fill="url(#petalGrad)" stroke="#bfeefa" stroke-width=".6" stroke-opacity=".5"/></g>
+            <g transform="rotate(216)"><path d="M0,0 C-20,-6 -24,-26 -14,-38 C-6,-46 6,-46 14,-38 C24,-26 20,-6 0,0 Z" fill="url(#petalGrad)" stroke="#bfeefa" stroke-width=".6" stroke-opacity=".5"/></g>
+            <g transform="rotate(288)"><path d="M0,0 C-20,-6 -24,-26 -14,-38 C-6,-46 6,-46 14,-38 C24,-26 20,-6 0,0 Z" fill="url(#petalGrad)" stroke="#bfeefa" stroke-width=".6" stroke-opacity=".5"/></g>
+            <ellipse rx="9" ry="7" fill="url(#centerOuterGrad)"/>
+            <ellipse rx="5.5" ry="4.2" cy=".5" fill="url(#centerInnerGrad)"/>
+          </symbol>
+
+          <symbol id="leaf" viewBox="0 -14 40 28">
+            <path d="M0,0 C10,-15 30,-15 40,0 C30,15 10,15 0,0 Z" fill="url(#leafGrad)"/>
+          </symbol>
+          <symbol id="leafDark" viewBox="0 -14 40 28">
+            <path d="M0,0 C10,-15 30,-15 40,0 C30,15 10,15 0,0 Z" fill="url(#leafGradDark)"/>
+          </symbol>
+        </defs>
+
+        <!-- tall wild grass blades, green, framing the bouquet like the video -->
+        <g class="wild-grass">
+          <g class="wgA"><path pathLength="100" d="M28,440 C24,380 36,330 26,275" style="animation-delay:.05s"/></g>
+          <g class="wgB"><path pathLength="100" d="M50,440 C56,390 42,345 50,300" style="animation-delay:.15s"/></g>
+          <g class="wgA"><path pathLength="100" d="M292,440 C296,378 282,332 292,280" style="animation-delay:.1s"/></g>
+          <g class="wgB"><path pathLength="100" d="M268,440 C262,388 276,348 266,305" style="animation-delay:.2s"/></g>
+          <g class="wgC"><path pathLength="100" d="M10,440 C8,400 18,375 10,350" style="animation-delay:.25s"/></g>
+          <g class="wgD"><path pathLength="100" d="M310,440 C312,402 302,378 310,355" style="animation-delay:.3s"/></g>
+        </g>
+
+        <!-- base bush cluster (drawn first, sits behind stems) -->
+        <g class="sway-bush">
+          <g transform="translate(160,428) rotate(-95) scale(1.6)"><use href="#leafDark" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.15s"/></g>
+          <g transform="translate(160,428) rotate(-65) scale(1.7)"><use href="#leafDark" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.22s"/></g>
+          <g transform="translate(160,428) rotate(-35) scale(1.75)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.3s"/></g>
+          <g transform="translate(160,428) rotate(-8) scale(1.8)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.38s"/></g>
+          <g transform="translate(160,428) rotate(20) scale(1.8)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.34s"/></g>
+          <g transform="translate(160,428) rotate(48) scale(1.75)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.28s"/></g>
+          <g transform="translate(160,428) rotate(75) scale(1.7)"><use href="#leafDark" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.2s"/></g>
+          <g transform="translate(160,428) rotate(100) scale(1.6)"><use href="#leafDark" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.12s"/></g>
+        </g>
+
+        <!-- left stem -->
+        <g class="sway-b">
+          <g class="stem">
+            <path pathLength="100" d="M160,430 C122,392 92,342 96,302 C100,260 80,222 88,178" style="animation-delay:.22s"/>
+          </g>
+          <g transform="translate(95,310) rotate(-160) scale(.7)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.65s"/></g>
+          <g transform="translate(90,240) rotate(15) scale(.65)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.85s"/></g>
+          <g transform="translate(88,178) scale(.85)"><use href="#flower" x="-46" y="-46" width="92" height="92" class="bloom-item flower-glow" style="animation-delay:1.25s, 2.6s"/></g>
+        </g>
+
+        <!-- right stem -->
+        <g class="sway-c">
+          <g class="stem">
+            <path pathLength="100" d="M160,430 C196,394 226,348 218,310 C212,266 232,226 222,182" style="animation-delay:.38s"/>
+          </g>
+          <g transform="translate(215,320) rotate(170) scale(.7)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.7s"/></g>
+          <g transform="translate(222,245) rotate(0) scale(.65)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.9s"/></g>
+          <g transform="translate(222,182) scale(.85)"><use href="#flower" x="-46" y="-46" width="92" height="92" class="bloom-item flower-glow" style="animation-delay:1.35s, 2.75s"/></g>
+        </g>
+
+        <!-- center stem (tallest, blooms last like in the video) -->
+        <g class="sway-a">
+          <g class="stem">
+            <path pathLength="100" d="M160,430 C150,368 168,306 158,234 C150,172 165,120 160,60" style="animation-delay:0s"/>
+          </g>
+          <g transform="translate(148,258) rotate(-150) scale(.8)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.6s"/></g>
+          <g transform="translate(168,328) rotate(20) scale(.85)"><use href="#leaf" x="0" y="-14" width="40" height="28" class="bloom-item" style="animation-delay:.75s"/></g>
+          <g transform="translate(160,60) scale(1.1)"><use href="#flower" x="-46" y="-46" width="92" height="92" class="bloom-item flower-glow" style="animation-delay:1.5s, 2.45s"/></g>
+        </g>
+
+        <!-- sparkle specks (static twinkle) -->
+        <circle class="speck" cx="190" cy="45" r="2" fill="#fff" style="animation-duration:2.4s; animation-delay:1.8s"/>
+        <circle class="speck" cx="130" cy="75" r="1.6" fill="#fff" style="animation-duration:2.8s; animation-delay:2s"/>
+        <circle class="speck" cx="245" cy="155" r="1.8" fill="#fff" style="animation-duration:2.2s; animation-delay:1.9s"/>
+        <circle class="speck" cx="60" cy="155" r="1.6" fill="#fff" style="animation-duration:3s; animation-delay:2.1s"/>
+
+        <!-- rising fireflies / light motes drifting up past the blooms -->
+        <circle class="firefly" cx="150" cy="120" r="2.2" fill="#dff6fb" style="animation-duration:5.5s; animation-delay:3s"/>
+        <circle class="firefly" cx="205" cy="160" r="1.8" fill="#dff6fb" style="animation-duration:6.2s; animation-delay:3.6s"/>
+        <circle class="firefly" cx="110" cy="200" r="1.6" fill="#dff6fb" style="animation-duration:5.8s; animation-delay:4.1s"/>
+        <circle class="firefly" cx="235" cy="220" r="2" fill="#dff6fb" style="animation-duration:6.6s; animation-delay:3.3s"/>
+        <circle class="firefly" cx="175" cy="90" r="1.5" fill="#dff6fb" style="animation-duration:5s; animation-delay:4.5s"/>
+      </svg>
+    </div>
+
+    <p class="garden-msg">Deliezma Syefira Kamila 🌹</p>
+  </section>
+
+<script>
+  // Build shimmering letters for the name
+  (function buildName(){
+    const words = ["DELIEZMA","SYEFIRA","KAMILA"];
+    const container = document.getElementById('nameText');
+    let idx = 0;
+    words.forEach(word=>{
+      const wordSpan = document.createElement('span');
+      wordSpan.className = 'word';
+      [...word].forEach(ch=>{
+        const l = document.createElement('span');
+        l.className = 'letter';
+        l.textContent = ch;
+        l.style.setProperty('--i', idx++);
+        wordSpan.appendChild(l);
+      });
+      container.appendChild(wordSpan);
+    });
+    const heart = document.createElement('span');
+    heart.className = 'letter heart-suffix';
+    heart.textContent = '♥';
+    heart.style.setProperty('--i', idx++);
+    container.appendChild(heart);
+  })();
+
+  // Floating heart particles on screen 1
+  (function buildHearts(){
+    const wrap = document.getElementById('heartsBg');
+    for(let i=0;i<10;i++){
+      const h = document.createElement('span');
+      h.className = 'heart-particle';
+      h.textContent = '♥';
+      h.style.left = (4 + Math.random()*92) + '%';
+      h.style.fontSize = (10 + Math.random()*16) + 'px';
+      h.style.animationDuration = (7 + Math.random()*7) + 's';
+      h.style.animationDelay = (Math.random()*8) + 's';
+      wrap.appendChild(h);
+    }
+  })();
+
+  // Twinkling stars on screen 2
+  (function buildStars(){
+    const wrap = document.getElementById('stars');
+    for(let i=0;i<50;i++){
+      const s = document.createElement('span');
+      s.className = 'star';
+      const size = (Math.random()*2 + 1).toFixed(1);
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      s.style.left = Math.random()*100 + '%';
+      s.style.top = Math.random()*68 + '%';
+      s.style.animationDuration = (Math.random()*3 + 2).toFixed(2) + 's';
+      s.style.animationDelay = (Math.random()*4).toFixed(2) + 's';
+      wrap.appendChild(s);
+    }
+  })();
+
+  // Screen transitions
+  const screenGreeting = document.getElementById('screen-greeting');
+  const screenFlower = document.getElementById('screen-flower');
+
+  document.getElementById('openBtn').addEventListener('click', ()=>{
+    screenGreeting.classList.remove('active');
+    screenGreeting.classList.add('leaving');
+    setTimeout(()=>{
+      screenGreeting.classList.remove('leaving');
+      screenGreeting.style.display = 'none';
+      screenFlower.style.display = 'flex';
+      requestAnimationFrame(()=>{ screenFlower.classList.add('active'); });
+    }, 420);
+  });
+
+  document.getElementById('backBtn').addEventListener('click', ()=>{
+    screenFlower.classList.remove('active');
+    screenFlower.classList.add('leaving');
+    setTimeout(()=>{
+      screenFlower.classList.remove('leaving');
+      screenFlower.style.display = 'none';
+      screenGreeting.style.display = 'flex';
+      requestAnimationFrame(()=>{ screenGreeting.classList.add('active'); });
+    }, 420);
+  });
+</script>
+</body>
+</html>
